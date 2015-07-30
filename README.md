@@ -105,10 +105,15 @@ To turn on nginx's HTTP basic authentication set an environment variable ENABLE_
 
 To create a htpassword file, you can use this:
 
+```
 htpasswd -nb YOUR_USERNAME SUPER_SECRET_PASSWORD >/etc/secrets/htpasswd
+```
 
 Or to Base64 encode and put inside a volume:
+
+```
 htpasswd -nb YOUR_USERNAME SUPER_SECRET_PASSWORD | base64
+```
 
 ### Push code to Git
 To push code changes back to git simply run:
