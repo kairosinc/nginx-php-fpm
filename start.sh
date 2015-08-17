@@ -50,5 +50,11 @@ if [[ "$TEMPLATE_NGINX_HTML" != "0" ]] ; then
   done
 fi
 
+# Run Phing if present in the container
+if [ -f /var/www/app/phing ]; then
+  cd /var/www/app
+  /var/www/app/phing ${STAGE}
+fi 
+
 # Start supervisord and services
 /usr/bin/supervisord -n -c /etc/supervisord.conf
