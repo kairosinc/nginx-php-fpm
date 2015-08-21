@@ -54,6 +54,7 @@ fi
 if [ -f /var/www/app/phing ]; then
   cd /var/www/app
   /var/www/app/phing ${STAGE}
+  chown -R www-data:www-data /var/www/app/*
 fi 
 
 # Start supervisord and services
