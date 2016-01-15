@@ -31,13 +31,13 @@ rm -rf /usr/share/man/??_*
 # tweak nginx config
 RUN sed -i -e"s/worker_processes  1/worker_processes 5/" /etc/nginx/nginx.conf && \
 sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf && \
-sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf && \
+sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 500m/" /etc/nginx/nginx.conf && \
 echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # tweak php-fpm config
 RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini && \
-sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php5/fpm/php.ini && \
-sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php5/fpm/php.ini && \
+sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 500M/g" /etc/php5/fpm/php.ini && \
+sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 500M/g" /etc/php5/fpm/php.ini && \
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf && \
 sed -i -e "s/error_log = \/var\/log\/php5-fpm.log;/error_log = \/proc\/self\/fd\/2;/g" /etc/php5/fpm/php-fpm.conf && \
 sed -i -e "s/;catch_workers_output\s*=\s*yes/catch_workers_output = yes/g" /etc/php5/fpm/pool.d/www.conf && \
